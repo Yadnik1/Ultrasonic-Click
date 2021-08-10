@@ -25,7 +25,7 @@ class Ultrsonic:
 
     def distance_mm(self):
             
-            utime.sleep_ms(1)
+            utime.sleep_ms(100)
             uart.write(b'\buf25')
             utime.sleep_ms(100)
             uart.write(b'\buf10')
