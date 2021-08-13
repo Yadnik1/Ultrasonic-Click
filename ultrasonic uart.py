@@ -2,13 +2,13 @@ from machine import UART,Pin
 import time,utime
 import sys
 
-buf0 = (0x55, 0x00, 0x01,0xFE)
-buf1 = (0x55, 0x01, 0x01, 0xFD)
-buf5= (0x55, 0x05, 0xFA)
-buf10= (0x55, 0x0A, 0x26, 0x00, 0xCF)
-buf17= (0x55, 0x11, 0x01, 0xED)
-buf19 = (0x55, 0x13, 0x01, 0xEB)
-buf25 =  (0x55, 0x19, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x84, 0x21, 0x08, 0x42, 0x10, 0x80, 0x80, 0x80, 0x80, 0x00, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x84, 0x21, 0x08, 0x42, 0x10, 0x80, 0x80, 0x80, 0x80, 0x00, 0x7C)
+buf0 = b'\x55\x00\x01\xFE'
+buf1 = b'\x55\x01\x01\xFD'
+buf5= b'\x55\x05\xFA'
+buf10=b'\x55\x0A\x26\x00\xCF'
+buf17=b'\x55\x11\x01\xED'
+buf19 =b'\x55\x13\x01\xEB'
+buf25 = b'\x55\x19\x88\x88\x88\x88\x88\x88b\x84\x21\x08\x42b\x10\x80\x80\x80\x80\x00\x88\x88\x88\x88\x88\x88\x84\x21\x08\x42\x10\x80\x80\x80\x80\x00\x7C'
 
 
 class Ultrsonic:
@@ -19,9 +19,9 @@ class Ultrsonic:
     def distance_mm(self):
             
             utime.sleep_ms(1)
-            uart.write(bytes(buf25))
+            uart.write(buf25)
             utime.sleep_ms(1)
-            uart.write(bytes(buf10))
+            uart.write(buf10)
             utime.sleep_ms(1)
             t = 0
             buf = bytearray(2)
@@ -35,9 +35,9 @@ class Ultrsonic:
                     dist = -1                
             return(dist)
             utime.sleep_ms(1)
-            uart.write(bytes(buf17))
+            uart.write(buf17)
             utime.sleep_ms(1)
-            uart.write(bytes(buf5))
+            uart.write(buf5)
             utime.sleep_ms(1)
 
 uart=UART("UART_1")
